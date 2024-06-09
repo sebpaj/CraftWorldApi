@@ -1,23 +1,29 @@
 import express from "express";
+import cors from "cors";
 import { graphqlHTTP } from "express-graphql";
 import { buildSchema } from "graphql";
+import { resolveLocations } from "./resolvers";
 
 // Define a schema
 const schema = buildSchema(`
+  type Location {
+    name: String!
+    material: String!
+  }
+
   type Query {
-    materials: [String!]!
-    sources: [String!]!
+    locations: [Location!]!
 
   }
 `);
 
 // Define a resolver
 const root = {
-  materials: () => ["Wood", "Stone"],
-  sources: () => ["Oak Forest", "Quarry"],
+  locations: () => resolveLocations(),
 };
 
 const app = express();
+app.use(cors());
 
 // Set up the GraphQL endpoint
 app.use(
