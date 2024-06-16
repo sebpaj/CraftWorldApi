@@ -10,7 +10,7 @@
     "build": "tsc"
   },
   "prisma": {
-    "seed": "node --loader ts-node/esm ./prisma/seeders/0001_location.ts"
+    "seed": "node --loader ts-node/esm ./prisma/seeders/0002_materials.ts"
   },
   "keywords": [],
   "author": "",

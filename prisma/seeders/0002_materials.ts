@@ -4,9 +4,15 @@ import { basename } from "path";
 
 const prisma = new PrismaClient();
 
-const locationData: Prisma.LocationCreateInput[] = [
-  { name: "Oak Forest" },
-  { name: "Quarry" },
+const materialsData: Prisma.MaterialCreateManyInput[] = [
+  {
+    name: "Oak Wood",
+    locationId: 1,
+  },
+  {
+    name: "Stone",
+    locationId: 2,
+  },
 ];
 
 async function main() {
@@ -25,10 +31,10 @@ async function main() {
   });
   console.log("Seeded", migration);
 
-  const locations = await prisma.location.createMany({
-    data: locationData,
+  const materials = await prisma.material.createMany({
+    data: materialsData,
   });
-  console.log("Created", locations);
+  console.log("Created", materials);
 }
 
 main()
